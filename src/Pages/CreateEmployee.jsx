@@ -14,6 +14,8 @@ import {
 } from '@mui/material'
 import statesList from '../datas/states.json'
 import dptList from '../datas/departments.json'
+import { addNewEmployee } from '../actions/employees.action.js'
+import { store } from '../index.js'
 
 function CreateEmployee() {
   const [firstName, setFirstName] = useState('')
@@ -80,8 +82,10 @@ function CreateEmployee() {
       const newEmployee = {
         firstName, lastName, dateOfBirth, startDate, street, city, stateName, zipCode, department
       }
-      console.log(newEmployee)
+      store.dispatch(addNewEmployee(newEmployee))
     }
+    const newState = store.getState()
+    console.log(newState)
   }
 
   return (
@@ -166,7 +170,6 @@ function CreateEmployee() {
             required
           ></TextField>
           <br />
-
           <FormControl
             fullWidth
             style={{
