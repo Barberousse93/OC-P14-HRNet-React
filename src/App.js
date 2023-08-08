@@ -1,10 +1,12 @@
 import React from 'react'
-import { Typography } from '@mui/material'
+import Router from './Utils/Router'
+import Header from './Components/Header';
 
 function App() {
   return (
     <div >
-      <Typography variant='h6' component='h6' >Hello World !</Typography>
+      <Header/>
+      <Router/>
     </div>
   );
 }
