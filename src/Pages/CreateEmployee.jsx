@@ -17,283 +17,280 @@ import dptList from '../datas/departments.json'
 import { addNewEmployee } from '../actions/employees.action.js'
 import { store } from '../index.js'
 
+// import ModalComponent from '../Components/ModalComponent'
+
 function CreateEmployee() {
-  const [firstName, setFirstName] = useState('')
-  const [firstNameError, setFirstNameError] = useState(false)
-  const [lastName, setLastName] = useState('')
-  const [lastNameError, setLastNameError] = useState(false)
-  const [dateOfBirth, setDateOfBirth] = useState('')
-  const [dateOfBirthError, setDateOfBirthError] = useState(false)
-  const [startDate, setStartDate] = useState('')
-  const [startDateError, setStartDateError] = useState(false)
-  const [street, setStreet] = useState('')
-  const [streetError, setStreetError] = useState(false)
-  const [city, setCity] = useState('')
-  const [cityError, setCityError] = useState(false)
-  const [stateName, setStateName] = useState('')
-  const [stateNameError, setStateNameError] = useState(false)
-  const [zipCode, setZipCode] = useState('')
-  const [zipCodeError, setZipCodeError] = useState(false)
-  const [department, setDepartment] = useState('')
-  const [departmentError, setDepartmentError] = useState(false)
+  const formDataInitialState = {
+    firstName: {
+      value: '',
+      error: false
+    },
+    lastName: {
+      value: '',
+      error: false
+    },
+    dateOfBirth: {
+      value: '',
+      error: false
+    },
+    startDate: {
+      value: '',
+      error: false
+    },
+    street: {
+      value: '',
+      error: false
+    },
+    city: {
+      value: '',
+      error: false
+    },
+    stateCode: {
+      value: '',
+      error: false
+    },
+    zipCode: {
+      value: '',
+      error: false
+    },
+    department: {
+      value: '',
+      error: false
+    }
+  }
+
+  const [formData, setFormData] = useState(formDataInitialState)
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]:
+      {
+        value: e.target.value,
+        error: false
+      }
+    })
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    let isError = false
-
-    if (!firstName) {
-      setFirstNameError(true)
-      isError = true
+    let formOK = true
+    for (const item in formData) {
+      if (!formData[item].value) {
+        setFormData({
+          ...formData,
+          [item]: {
+            value: '',
+            error: true
+          }
+        })
+        formOK = false
+      }
     }
-    if (!lastName) {
-      setLastNameError(true)
-      isError = true
-    }
-    if (!dateOfBirth) {
-      setDateOfBirthError(true)
-
-      isError = true
-    }
-    if (!startDate) {
-      setStartDateError(true)
-      isError = true
-    }
-    if (!street) {
-      setStreetError(true)
-      isError = true
-    }
-    if (!city) {
-      setCityError(true)
-      isError = true
-    }
-    if (!stateName) {
-      setStateNameError(true)
-      isError = true
-    }
-    if (!zipCode) {
-      setZipCodeError(true)
-      isError = true
-    }
-    if (!department) {
-      setDepartmentError(true)
-      isError = true
-    }
-    if (!isError) {
-      const newEmployee = {
-        firstName, lastName, dateOfBirth, startDate, street, city, stateName, zipCode, department
+    if (formOK) {
+      const newEmployee = {}
+      const id = Math.floor(Math.random() * 1000)
+      newEmployee.id = id
+      for (const item in formData) {
+        newEmployee[item] = formData[item].value
       }
       store.dispatch(addNewEmployee(newEmployee))
+      alert('Employee successfully added.')
+      setFormData(formDataInitialState)
     }
+
     const newState = store.getState()
     console.log(newState)
   }
 
   return (
-    <Container>
-      <Typography variant="h4" component="h1">
-        Create Employee
-      </Typography>
+    <>
+      {/* <ModalComponent open={showModal} text="Employee successfully added." /> */}
+      <Container>
+        <Typography variant="h4" component="h1">
+          Create Employee
+        </Typography>
 
-      <Link to="/employeeslist">View Current Employees</Link>
-      <br />
-      <FormControl
-        fullWidth
-        style={{ translate: '50%', width: '50%', margin: 'auto' }}
-        // className={classes.FormcontrolStyle}
-      >
-        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-          <TextField
-            fullWidth
-            id="firstName"
-            value={firstName}
-            onChange={(e) => {
-              setFirstName(e.target.value)
-              setFirstNameError(false)
-            }}
-            style={{ marginTop: '20px' }}
-            type="text"
-            variant="outlined"
-            label="First Name"
-            required
-            error={firstNameError}
-            helperText={firstNameError ? 'Invalid Entry' : null}
-          ></TextField>
-          <br />
-          <TextField
-            fullWidth
-            id="lastName"
-            value={lastName}
-            onChange={(e) => {
-              setLastName(e.target.value)
-              setLastNameError(false)
-            }}
-            style={{ marginTop: '20px' }}
-            type="text"
-            variant="outlined"
-            label="Last Name"
-            required
-            error={lastNameError}
-            helperText={lastNameError ? 'Invalid Entry' : null}
-          ></TextField>
-          <br />
-          <TextField
-            fullWidth
-            id="dateOfBirth"
-            value={dateOfBirth}
-            type="date"
-            style={{ marginTop: '20px' }}
-            label="Date of Birth"
-            InputLabelProps={{ shrink: true }}
-            onChange={(e) => {
-              setDateOfBirth(e.target.value)
-              setDateOfBirthError(false)
-            }}
-            error={dateOfBirthError}
-            helperText={dateOfBirthError ? 'Invalid Entry' : null}
-            required
-          ></TextField>
-          <br />
-          <TextField
-            fullWidth
-            id="startDate"
-            value={startDate}
-            type="date"
-            style={{ marginTop: '20px' }}
-            label="Start Date"
-            InputLabelProps={{ shrink: true }}
-            onChange={(e) => {
-              setStartDate(e.target.value)
-              setStartDateError(false)
-            }}
-            error={startDateError}
-            helperText={startDateError ? 'Invalid Entry' : null}
-            required
-          ></TextField>
-          <br />
-          <FormControl
-            fullWidth
-            style={{
-              border: '1px solid gray',
-              borderRadius: '5px',
-              marginTop: '20px',
-              padding: '0 10px',
-              paddingBottom: '10px',
-              marginBottom: '20px'
-            }}
+        <Link to="/employeeslist">View Current Employees</Link>
+        <br />
+        <FormControl
+          fullWidth
+          style={{ translate: '50%', width: '50%', margin: 'auto' }}
+        >
+          <form
+            noValidate
+            autoComplete="off"
+            onSubmit={handleSubmit}
+            id="createForm"
+            name="createForm"
           >
-            <FormLabel>Address</FormLabel>
             <TextField
               fullWidth
-              id="street"
-              value={street}
-              type="text"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName.value}
+              onChange={handleChange}
               style={{ marginTop: '20px' }}
-              label="Street"
+              type="text"
+              variant="outlined"
+              label="First Name"
               required
-              onChange={(e) => {
-                setStreet(e.target.value)
-                setStreetError(false)
-              }}
-              error={streetError}
-              helperText={streetError ? 'Invalid Entry' : null}
+              error={formData.firstName.error}
+              helperText={formData.firstName.error ? 'Invalid Entry' : null}
             ></TextField>
-            {/* <br /> */}
+            <br />
             <TextField
               fullWidth
-              id="city"
-              value={city}
-              type="text"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName.value}
+              onChange={handleChange}
               style={{ marginTop: '20px' }}
-              label="City"
+              type="text"
+              variant="outlined"
+              label="Last Name"
               required
-              onChange={(e) => {
-                setCity(e.target.value)
-                setCityError(false)
-              }}
-              error={cityError}
-              helperText={cityError ? 'Invalid Entry' : null}
+              error={formData.lastName.error}
+              helperText={formData.lastName.error ? 'Invalid Entry' : null}
+            ></TextField>
+            <br />
+            <TextField
+              fullWidth
+              id="dateOfBirth"
+              name="dateOfBirth"
+              value={formData.dateOfBirth.value}
+              type="date"
+              style={{ marginTop: '20px' }}
+              label="Date of Birth"
+              InputLabelProps={{ shrink: true }}
+              onChange={handleChange}
+              error={formData.dateOfBirth.error}
+              helperText={formData.dateOfBirth.error ? 'Invalid Entry' : null}
+              required
+            ></TextField>
+            <br />
+            <TextField
+              fullWidth
+              id="startDate"
+              name="startDate"
+              value={formData.startDate.value}
+              type="date"
+              style={{ marginTop: '20px' }}
+              label="Start Date"
+              InputLabelProps={{ shrink: true }}
+              onChange={handleChange}
+              error={formData.startDate.error}
+              helperText={formData.startDate.error ? 'Invalid Entry' : null}
+              required
             ></TextField>
             <br />
             <FormControl
-              required
               fullWidth
-              // FormHelperText={stateNameError ? 'Invalid Entry' : null}
-              // InputLabel='State'
+              style={{
+                border: '1px solid gray',
+                borderRadius: '5px',
+                marginTop: '20px',
+                padding: '0 10px',
+                paddingBottom: '10px',
+                marginBottom: '20px'
+              }}
             >
-              <InputLabel>State</InputLabel>
+              <FormLabel>Address</FormLabel>
+              <TextField
+                fullWidth
+                id="street"
+                name="street"
+                value={formData.street.value}
+                type="text"
+                style={{ marginTop: '20px' }}
+                label="Street"
+                required
+                onChange={handleChange}
+                error={formData.street.error}
+                helperText={formData.street.error ? 'Invalid Entry' : null}
+              ></TextField>
+              {/* <br /> */}
+              <TextField
+                fullWidth
+                id="city"
+                name="city"
+                value={formData.city.value}
+                type="text"
+                style={{ marginTop: '20px' }}
+                label="City"
+                required
+                onChange={handleChange}
+                error={formData.city.error}
+                helperText={formData.city.error ? 'Invalid Entry' : null}
+              ></TextField>
+              <br />
+              <FormControl required fullWidth>
+                <InputLabel>State</InputLabel>
+                <Select
+                  id="stateCode"
+                  name="stateCode"
+                  value={formData.stateCode.value}
+                  label="State"
+                  onChange={handleChange}
+                  error={formData.stateCode.error}
+                >
+                  {statesList.states.map((item) => (
+                    <MenuItem key={item.abbreviation} value={item.abbreviation}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+                <FormHelperText>
+                  {formData.stateCode.error ? 'Invalid Entry' : null}
+                </FormHelperText>
+              </FormControl>
+              <TextField
+                fullWidth
+                id="zipCode"
+                name="zipCode"
+                value={formData.zipCode.value}
+                type="number"
+                style={{ marginTop: '20px' }}
+                label="Zip Code"
+                required
+                onChange={handleChange}
+                error={formData.zipCode.error}
+                helperText={formData.zipCode.error ? 'Invalid Entry' : null}
+              ></TextField>
+            </FormControl>
+            <FormControl required fullWidth>
+              <InputLabel>Department</InputLabel>
               <Select
-                id="stateName"
-                value={stateName}
-                label="State"
-                onChange={(e) => {
-                  setStateName(e.target.value)
-                  setStateNameError(false)
-                }}
-                error={stateNameError}
+                id="department"
+                name="department"
+                value={formData.department.value}
+                label="Department"
+                onChange={handleChange}
+                error={formData.department.error}
               >
-                {statesList.states.map((item) => (
-                  <MenuItem key={item.abbreviation} value={item.name}>
-                    {item.name}
+                {dptList.departments.map((item, index) => (
+                  <MenuItem key={index} value={item}>
+                    {item}
                   </MenuItem>
                 ))}
               </Select>
               <FormHelperText>
-                {stateNameError ? 'Invalid Entry' : null}
+                {formData.department.error ? 'Invalid Entry' : null}
               </FormHelperText>
             </FormControl>
-            <TextField
-              fullWidth
-              id="zipCode"
-              value={zipCode}
-              type="number"
+            <br />
+            <Button
+              id="submitButton"
+              type="submit"
+              variant="contained"
               style={{ marginTop: '20px' }}
-              label="Zip Code"
-              required
-              onChange={(e) => {
-                setZipCode(e.target.value)
-                setZipCodeError(false)
-              }}
-              error={zipCodeError}
-              helperText={zipCodeError ? 'Invalid Entry' : null}
-            ></TextField>
-          </FormControl>
-          <FormControl
-            required
-            fullWidth
-          >
-            <InputLabel>Department</InputLabel>
-            <Select
-              id="department"
-              value={department}
-              label="Department"
-              onChange={(e) => {
-                setDepartment(e.target.value)
-                setDepartmentError(false)
-              }}
-              error={departmentError}
             >
-              {dptList.departments.map((item, index) => (
-                <MenuItem key={index} value={item}>
-                  {item}
-                </MenuItem>
-              ))}
-            </Select>
-            <FormHelperText>
-              {departmentError ? 'Invalid Entry' : null}
-            </FormHelperText>
-          </FormControl>
-          <br />
-          <Button
-            id="submitButton"
-            type="submit"
-            variant="contained"
-            style={{ marginTop: '20px' }}
-          >
-            Save
-          </Button>
-        </form>
-      </FormControl>
-    </Container>
+              Save
+            </Button>
+          </form>
+        </FormControl>
+      </Container>
+    </>
   )
 }
 
