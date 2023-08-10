@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { store } from '../index.js'
-import { Typography, Container } from '@mui/material'
+import { Typography, Container, TextField, InputAdornment, FormControl } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 
 const columns = [
   {
@@ -69,19 +70,65 @@ const columns = [
 
 function EmployeesList() {
   const employeesList = store.getState()
-
   const rows = employeesList.employees.employees
 
+  const [found, setFound] = useState([])
+  const [noResult, setNoResult] = useState(false)
+
+  const handleChange = (e) => {
+    setNoResult(false)
+    // if (e.target.value.length > 3) {
+    const filtered = rows.filter((obj) => {
+      return (
+        obj.department.toUpperCase().includes(e.target.value.toUpperCase()) ||
+        obj.firstName.toUpperCase().includes(e.target.value.toUpperCase()) ||
+        obj.lastName.toUpperCase().includes(e.target.value.toUpperCase()) ||
+        obj.street.toUpperCase().includes(e.target.value.toUpperCase()) ||
+        obj.city.toUpperCase().includes(e.target.value.toUpperCase()) ||
+        obj.zipCode.toUpperCase().includes(e.target.value.toUpperCase()) ||
+        obj.stateCode.toUpperCase().includes(e.target.value.toUpperCase())
+      )
+    })
+    if (filtered.length > 0) {
+      // console.log('filtered YES', filtered)
+      setFound(filtered)
+    } else {
+      // console.log('filtered NO', filtered)
+      setNoResult(true)
+    }
+    // }
+  }
   return (
     <div>
-      <Container>
+      <Container
+        style={{
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
         <Typography variant="h4" component="h1">
           Current Employees
         </Typography>
         <Link to="/">Home</Link>
+        <FormControl style={{ alignSelf: 'end' }}>
+          <TextField
+            onChange={handleChange}
+            size="small"
+            // label="Search"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchOutlinedIcon />
+                </InputAdornment>
+              )
+            }}
+            variant="outlined"
+            helperText={noResult ? 'No Result' : null}
+          ></TextField>
+        </FormControl>
         <DataGrid
           style={{ marginTop: '20px' }}
-          rows={rows}
+          rows={found.length === 0 ? rows : found}
           columns={columns}
           initialState={{
             pagination: {
