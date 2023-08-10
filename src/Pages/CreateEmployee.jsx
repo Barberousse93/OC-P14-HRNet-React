@@ -89,7 +89,8 @@ function CreateEmployee() {
     }
     if (formOK) {
       const newEmployee = {}
-      const id = Math.floor(Math.random() * 1000)
+      const employee = store.getState()
+      const id = employee.employees.employees.length + 1
       newEmployee.id = id
       for (const item in formData) {
         newEmployee[item] = formData[item].value

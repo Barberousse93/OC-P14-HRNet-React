@@ -11,7 +11,8 @@ function Header() {
         <img
           src={logo}
           alt="logo HRNet"
-          style={{ width: '150px', height: '150px' }}
+          width={'150px'}
+          height={'138px'}
         />
       </Link>
           <Typography
