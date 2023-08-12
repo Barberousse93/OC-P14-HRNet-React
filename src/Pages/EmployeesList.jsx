@@ -4,6 +4,7 @@ import { store } from '../index.js'
 import { Typography, Container, TextField, InputAdornment, FormControl } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
+import ClearIcon from '@mui/icons-material/Clear';
 
 const columns = [
   {
@@ -74,9 +75,11 @@ function EmployeesList() {
 
   const [found, setFound] = useState([])
   const [noResult, setNoResult] = useState(false)
+  const [search, setSearch] = useState('')
 
   const handleChange = (e) => {
     setNoResult(false)
+    setSearch(e.target.value)
     // if (e.target.value.length > 3) {
     const filtered = rows.filter((obj) => {
       return (
@@ -98,6 +101,13 @@ function EmployeesList() {
     }
     // }
   }
+
+  const handleClear = () => {
+    console.log('coucou')
+    setSearch('')
+    setFound([])
+    setNoResult(false)
+  }
   return (
     <div>
       <Container
@@ -112,6 +122,7 @@ function EmployeesList() {
         <Link to="/">Home</Link>
         <FormControl style={{ alignSelf: 'end' }}>
           <TextField
+            value={search}
             onChange={handleChange}
             size="small"
             // label="Search"
@@ -119,6 +130,11 @@ function EmployeesList() {
               startAdornment: (
                 <InputAdornment position="start">
                   <SearchOutlinedIcon />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <ClearIcon onClick ={handleClear} style={{ cursor: 'pointer' }} />
                 </InputAdornment>
               )
             }}
