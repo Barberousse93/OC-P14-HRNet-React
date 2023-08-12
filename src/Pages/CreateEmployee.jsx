@@ -17,7 +17,7 @@ import dptList from '../datas/departments.json'
 import { addNewEmployee } from '../actions/employees.action.js'
 import { store } from '../index.js'
 
-// import ModalComponent from '../Components/ModalComponent'
+import Modal from '../Components/Modal'
 
 function CreateEmployee() {
   const formDataInitialState = {
@@ -72,6 +72,8 @@ function CreateEmployee() {
     })
   }
 
+  const [isOpen, setIsOpen] = useState(false)
+
   const handleSubmit = (e) => {
     e.preventDefault()
     let formOK = true
@@ -85,6 +87,7 @@ function CreateEmployee() {
           }
         })
         formOK = false
+        console.log(formData[item].error, formData[item].error)
       }
     }
     if (formOK) {
@@ -96,17 +99,17 @@ function CreateEmployee() {
         newEmployee[item] = formData[item].value
       }
       store.dispatch(addNewEmployee(newEmployee))
-      alert('Employee successfully added.')
       setFormData(formDataInitialState)
+      setIsOpen(true)
     }
 
-    const newState = store.getState()
-    console.log(newState)
+    // const newState = store.getState()
+    // console.log(newState)
   }
 
   return (
     <>
-      {/* <ModalComponent open={showModal} text="Employee successfully added." /> */}
+      {isOpen && <Modal setIsOpen={setIsOpen} text="Employee successfully added." />}
       <Container>
         <Typography variant="h4" component="h1">
           Create Employee

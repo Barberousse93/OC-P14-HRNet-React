@@ -1,5 +1,14 @@
 header{
+    width: 90%;
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    flex-wrap: wrap;
+    margin:auto;
+}
+
+.navBar{
+    display: flex;
     align-items: center;
 }
