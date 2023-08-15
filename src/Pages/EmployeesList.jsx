@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link as routerLink } from 'react-router-dom'
-import { store } from '../index.js'
+import { store } from '../App'
 import { Typography, Container, TextField, InputAdornment, FormControl, Link } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'

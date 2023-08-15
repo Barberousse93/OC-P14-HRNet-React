@@ -16,7 +16,7 @@ import {
 import statesList from '../datas/states.json'
 import dptList from '../datas/departments.json'
 import { addNewEmployee } from '../actions/employees.action.js'
-import { store } from '../index.js'
+import { store } from '../App'
 
 import Modal from '../Components/Modal'
 
