@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link as routerLink } from 'react-router-dom'
 import { store } from '../index.js'
-import { Typography, Container, TextField, InputAdornment, FormControl } from '@mui/material'
+import { Typography, Container, TextField, InputAdornment, FormControl, Link } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import ClearIcon from '@mui/icons-material/Clear';
@@ -119,7 +119,10 @@ function EmployeesList() {
         <Typography variant="h4" component="h1">
           Current Employees
         </Typography>
-        <Link to="/">Home</Link>
+        <Link to="/"
+          component={routerLink}
+        underline = 'hover'
+        >Home</Link>
         <FormControl style={{ alignSelf: 'end' }}>
           <TextField
             value={search}

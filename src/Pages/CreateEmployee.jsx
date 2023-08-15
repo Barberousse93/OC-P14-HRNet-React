@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link as routerLink } from 'react-router-dom'
 import {
   FormControl,
   FormLabel,
@@ -10,7 +10,8 @@ import {
   Select,
   InputLabel,
   MenuItem,
-  FormHelperText
+  FormHelperText,
+  Link
 } from '@mui/material'
 import statesList from '../datas/states.json'
 import dptList from '../datas/departments.json'
@@ -109,13 +110,15 @@ function CreateEmployee() {
 
   return (
     <>
-      {isOpen && <Modal setIsOpen={setIsOpen} text="Employee successfully added." />}
+      {isOpen && (
+        <Modal setIsOpen={setIsOpen} text="Employee successfully added." />
+      )}
       <Container>
         <Typography variant="h4" component="h1">
           Create Employee
         </Typography>
 
-        <Link to="/employeeslist">View Current Employees</Link>
+        <Link to="/employeeslist" component={routerLink} >View Current Employees</Link>
         <br />
         <FormControl
           fullWidth
