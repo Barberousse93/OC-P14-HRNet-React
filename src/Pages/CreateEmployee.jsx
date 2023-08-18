@@ -11,7 +11,7 @@ import {
   InputLabel,
   MenuItem,
   FormHelperText,
-  Link
+  Link,
 } from '@mui/material'
 import statesList from '../datas/states.json'
 import dptList from '../datas/departments.json'
@@ -24,40 +24,40 @@ function CreateEmployee() {
   const formDataInitialState = {
     firstName: {
       value: '',
-      error: false
+      error: false,
     },
     lastName: {
       value: '',
-      error: false
+      error: false,
     },
     dateOfBirth: {
       value: '',
-      error: false
+      error: false,
     },
     startDate: {
       value: '',
-      error: false
+      error: false,
     },
     street: {
       value: '',
-      error: false
+      error: false,
     },
     city: {
       value: '',
-      error: false
+      error: false,
     },
     stateCode: {
       value: '',
-      error: false
+      error: false,
     },
     zipCode: {
       value: '',
-      error: false
+      error: false,
     },
     department: {
       value: '',
-      error: false
-    }
+      error: false,
+    },
   }
 
   const [formData, setFormData] = useState(formDataInitialState)
@@ -65,11 +65,10 @@ function CreateEmployee() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]:
-      {
+      [e.target.name]: {
         value: e.target.value,
-        error: false
-      }
+        error: false,
+      },
     })
   }
 
@@ -84,11 +83,10 @@ function CreateEmployee() {
           ...formData,
           [item]: {
             value: '',
-            error: true
-          }
+            error: true,
+          },
         })
         formOK = false
-        console.log(formData[item].error, formData[item].error)
       }
     }
     if (formOK) {
@@ -118,7 +116,9 @@ function CreateEmployee() {
           Create Employee
         </Typography>
 
-        <Link to="/employeeslist" component={routerLink} >View Current Employees</Link>
+        <Link to="/employeeslist" component={routerLink}>
+          View Current Employees
+        </Link>
         <br />
         <FormControl
           fullWidth
@@ -199,7 +199,7 @@ function CreateEmployee() {
                 marginTop: '20px',
                 padding: '0 10px',
                 paddingBottom: '10px',
-                marginBottom: '20px'
+                marginBottom: '20px',
               }}
             >
               <FormLabel>Address</FormLabel>
