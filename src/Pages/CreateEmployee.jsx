@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 import React, { useState } from 'react'
 import { Link as routerLink } from 'react-router-dom'
 import {

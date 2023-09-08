@@ -73,14 +73,13 @@ function EmployeesList() {
   const employeesList = store.getState()
   const rows = employeesList.employees.employees
 
+  // Champs recherche
   const [found, setFound] = useState([])
   const [noResult, setNoResult] = useState(false)
   const [search, setSearch] = useState('')
-
   const handleChange = (e) => {
     setNoResult(false)
     setSearch(e.target.value)
-    // if (e.target.value.length > 3) {
     const filtered = rows.filter((obj) => {
       return (
         obj.department.toUpperCase().includes(e.target.value.toUpperCase()) ||
@@ -93,17 +92,13 @@ function EmployeesList() {
       )
     })
     if (filtered.length > 0) {
-      // console.log('filtered YES', filtered)
       setFound(filtered)
     } else {
-      // console.log('filtered NO', filtered)
       setNoResult(true)
     }
-    // }
   }
 
   const handleClear = () => {
-    console.log('coucou')
     setSearch('')
     setFound([])
     setNoResult(false)
