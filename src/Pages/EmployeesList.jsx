@@ -77,6 +77,8 @@ const columns = [
   },
 ]
 
+const experimentalFeatures = { ariaV7: true }
+
 function EmployeesList() {
   const employeesList = store.getState()
   const rows = employeesList.employees.employees
@@ -156,7 +158,6 @@ function EmployeesList() {
           rows={found.length === 0 ? rows : found}
           columns={columns}
           initialState={{
-            arialabel: 'item per page',
             pagination: {
               paginationModel: {
                 pageSize: 5,
@@ -165,6 +166,7 @@ function EmployeesList() {
           }}
           pageSizeOptions={[5, 10, 50, 100]}
           disableRowSelectionOnClick
+          experimentalFeatures={experimentalFeatures}
         />
       </Container>
     </div>
