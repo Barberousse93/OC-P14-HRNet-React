@@ -1,72 +1,80 @@
+/* eslint-disable comma-dangle */
 import React, { useState } from 'react'
 import { Link as routerLink } from 'react-router-dom'
 import { store } from '../App'
-import { Typography, Container, TextField, InputAdornment, FormControl, Link } from '@mui/material'
+import {
+  Typography,
+  Container,
+  TextField,
+  InputAdornment,
+  FormControl,
+  Link,
+} from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import ClearIcon from '@mui/icons-material/Clear';
+import ClearIcon from '@mui/icons-material/Clear'
 
 const columns = [
   {
     field: 'id',
     headerName: 'ID',
     width: 50,
-    editable: false
+    editable: false,
   },
   {
     field: 'firstName',
     headerName: 'First name',
     width: 150,
-    editable: false
+    editable: false,
   },
   {
     field: 'lastName',
     headerName: 'Last name',
     width: 150,
-    editable: false
+    editable: false,
   },
   {
     field: 'startDate',
     headerName: 'Start Date',
     width: 100,
-    editable: false
+    editable: false,
   },
   {
     field: 'department',
     headerName: 'Department',
     width: 150,
-    editable: false
+    editable: false,
   },
   {
     field: 'dateOfBirth',
     headerName: 'Date of Birth',
     width: 100,
-    editable: false
+    editable: false,
   },
   {
     field: 'street',
     headerName: 'Street',
     width: 150,
-    editable: false
+    editable: false,
   },
   {
     field: 'city',
     headerName: 'City',
     width: 150,
-    editable: false
+    editable: false,
   },
   {
     field: 'stateCode',
     headerName: 'State',
     width: 50,
-    editable: false
+    editable: false,
   },
   {
     field: 'zipCode',
     headerName: 'Zip Code',
     width: 100,
-    editable: false
-  }
+    editable: false,
+  },
 ]
 
 function EmployeesList() {
@@ -108,22 +116,21 @@ function EmployeesList() {
       <Container
         style={{
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
         }}
       >
         <Typography variant="h4" component="h1">
           Current Employees
         </Typography>
-        <Link to="/"
-          component={routerLink}
-        underline = 'hover'
-        >Home</Link>
+        <Link to="/" component={routerLink} underline="hover">
+          Home
+        </Link>
         <FormControl style={{ alignSelf: 'end' }}>
           <TextField
             value={search}
             onChange={handleChange}
             size="small"
-            // label="Search"
+            label="Search"
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -132,24 +139,29 @@ function EmployeesList() {
               ),
               endAdornment: (
                 <InputAdornment position="end">
-                  <ClearIcon onClick ={handleClear} style={{ cursor: 'pointer' }} />
+                  <ClearIcon
+                    onClick={handleClear}
+                    style={{ cursor: 'pointer' }}
+                  />
                 </InputAdornment>
-              )
+              ),
             }}
             variant="outlined"
             helperText={noResult ? 'No Result' : null}
           ></TextField>
         </FormControl>
         <DataGrid
+          aria-label="Employees list"
           style={{ marginTop: '20px' }}
           rows={found.length === 0 ? rows : found}
           columns={columns}
           initialState={{
+            arialabel: 'item per page',
             pagination: {
               paginationModel: {
-                pageSize: 5
-              }
-            }
+                pageSize: 5,
+              },
+            },
           }}
           pageSizeOptions={[5, 10, 50, 100]}
           disableRowSelectionOnClick
