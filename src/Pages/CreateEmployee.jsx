@@ -19,7 +19,8 @@ import dptList from '../datas/departments.json'
 import { addNewEmployee } from '../actions/employees.action.js'
 import { store } from '../App'
 
-import Modal from '../Components/Modal'
+// import Modal from '../Components/Modal'
+import Modal from 'modale_by_barberousse'
 
 function CreateEmployee() {
   const formDataInitialState = {
@@ -133,6 +134,7 @@ function CreateEmployee() {
             name="createForm"
           >
             <TextField
+              size="small"
               fullWidth
               id="firstName"
               name="firstName"
@@ -148,6 +150,7 @@ function CreateEmployee() {
             ></TextField>
             <br />
             <TextField
+              size="small"
               fullWidth
               id="lastName"
               name="lastName"
@@ -163,6 +166,7 @@ function CreateEmployee() {
             ></TextField>
             <br />
             <TextField
+              size="small"
               fullWidth
               id="dateOfBirth"
               name="dateOfBirth"
@@ -178,6 +182,7 @@ function CreateEmployee() {
             ></TextField>
             <br />
             <TextField
+              size="small"
               fullWidth
               id="startDate"
               name="startDate"
@@ -205,6 +210,7 @@ function CreateEmployee() {
             >
               <FormLabel>Address</FormLabel>
               <TextField
+                size="small"
                 fullWidth
                 id="street"
                 name="street"
@@ -219,6 +225,7 @@ function CreateEmployee() {
               ></TextField>
               {/* <br /> */}
               <TextField
+                size="small"
                 fullWidth
                 id="city"
                 name="city"
@@ -235,6 +242,7 @@ function CreateEmployee() {
               <FormControl required fullWidth>
                 <InputLabel>State</InputLabel>
                 <Select
+                  // size="small"
                   id="stateCode"
                   name="stateCode"
                   value={formData.stateCode.value}
@@ -253,6 +261,7 @@ function CreateEmployee() {
                 </FormHelperText>
               </FormControl>
               <TextField
+                size="small"
                 fullWidth
                 id="zipCode"
                 name="zipCode"
