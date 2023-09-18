@@ -1,6 +1,7 @@
+/* eslint-disable comma-dangle */
 import React from 'react'
 import Router from './Utils/Router'
-import Header from './Components/Header';
+import Header from './Components/Header'
 import { createTheme } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
 import ThemeHandler from './Utils/Theming/ThemeProvider'
@@ -14,27 +15,29 @@ import thunk from 'redux-thunk'
 
 export const darkTheme = createTheme({
   palette: {
-    mode: 'dark'
-  }
+    mode: 'dark',
+  },
 })
 
 export const lightTheme = createTheme({
   palette: {
-    mode: 'light'
-  }
+    mode: 'light',
+  },
 })
 
+/**
+ * Configuration de redux persist
+ */
 const persistConfig = {
   key: 'root',
-  storage
+  storage,
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
   reducer: persistedReducer,
-  // devTools: process.env.NODE_ENV !== 'production',
-  middleware: [thunk]
+  middleware: [thunk],
 })
 
 export const persistor = persistStore(store)
@@ -55,4 +58,4 @@ function App() {
   )
 }
 
-export default App;
+export default App

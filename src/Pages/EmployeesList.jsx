@@ -14,6 +14,9 @@ import { DataGrid } from '@mui/x-data-grid'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import ClearIcon from '@mui/icons-material/Clear'
 
+/**
+ * Initialisation des colonnes de la gatagrid
+ */
 const columns = [
   {
     field: 'id',
@@ -79,7 +82,14 @@ const columns = [
 
 const experimentalFeatures = { ariaV7: true }
 
+/**
+ * Liste des employés enregistrés
+ * @returns
+ */
 function EmployeesList() {
+  /**
+   * Rappel du state
+   */
   const employeesList = store.getState()
   const rows = employeesList.employees.employees
 
@@ -107,7 +117,9 @@ function EmployeesList() {
       setNoResult(true)
     }
   }
-
+  /**
+   * Réinitialisation du champs de recherche
+   */
   const handleClear = () => {
     setSearch('')
     setFound([])

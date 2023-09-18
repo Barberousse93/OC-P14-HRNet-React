@@ -22,6 +22,10 @@ import { store } from '../App'
 // import Modal from '../Components/Modal'
 import Modal from 'modale_by_barberousse'
 
+/**
+ * Stete initial des données d'un employé
+ * @returns {object}
+ */
 function CreateEmployee() {
   const formDataInitialState = {
     firstName: {
@@ -62,8 +66,13 @@ function CreateEmployee() {
     },
   }
 
+  /** initialisation du state et du formulaire */
   const [formData, setFormData] = useState(formDataInitialState)
 
+  /**
+   * Mise à jour du state à chaque changement
+   * @param {event} e
+   */
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -76,6 +85,11 @@ function CreateEmployee() {
 
   const [isOpen, setIsOpen] = useState(false)
 
+  /**
+   * Soumission du formulaire
+   * Contrôle de la présence de tous les champs requis
+   * @param {event} e
+   */
   const handleSubmit = (e) => {
     e.preventDefault()
     let formOK = true
@@ -99,13 +113,13 @@ function CreateEmployee() {
       for (const item in formData) {
         newEmployee[item] = formData[item].value
       }
+      /** Mise à jour du State REDUX si le formulaire est complet */
       store.dispatch(addNewEmployee(newEmployee))
+      /** Réinitialisation du formulaire */
       setFormData(formDataInitialState)
+      /** Affichage de la modale */
       setIsOpen(true)
     }
-
-    // const newState = store.getState()
-    // console.log(newState)
   }
 
   return (

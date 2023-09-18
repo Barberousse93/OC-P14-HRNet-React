@@ -1,55 +1,33 @@
+/* eslint-disable comma-dangle */
 import { createTheme } from '@mui/material'
 
+/**
+ * Thème light/dark
+ */
 const LOCAL_STORAGE_KEY = 'isDark'
 
-// const baseTheme = createTheme({
-//   typography: {
-//     fontFamily: "'Work Sans', sans-serif",
-//     fontSize: 14,
-//     fontFamilySecondary: "'Roboto Condensed', sans-serif"
-//   }
-// })
-
 const DARK_THEME = createTheme({
-//   ...baseTheme,
-//   palette: {
-//     type: 'dark'
-//         ,
-//     primary: {
-//       main: '#5c85ff'
-//     },
-//     secondary: {
-//       main: '#000000'
-//     },
-//     background: {
-//       default: '#353030'
-//     },
-//     text: {
-//       primary: '#f7f2f2'
-//     }
-//   }
   palette: {
-    mode: 'dark'
-  }
+    mode: 'dark',
+  },
 })
 
 const LIGHT_THEME = createTheme({
-  //   ...baseTheme,
   palette: {
     type: 'light',
     primary: {
-      main: '#586F05'
+      main: '#586F05',
     },
     secondary: {
-      main: '#93AD18'
+      main: '#93AD18',
     },
     background: {
-      default: '#fff'
+      default: '#fff',
     },
     text: {
-      primary: '#343531'
-    }
-  }
+      primary: '#343531',
+    },
+  },
 })
 
 export { DARK_THEME, LIGHT_THEME, LOCAL_STORAGE_KEY }

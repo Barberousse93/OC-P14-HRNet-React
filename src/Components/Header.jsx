@@ -6,6 +6,10 @@ import logo from '../assets/logo.jpg'
 import { Switch, Typography } from '@mui/material'
 import ThemeContext from '../Utils/Theming/ThemeContext'
 
+/**
+ * Header
+ * @returns {component}
+ */
 function Header() {
   const { isDark, toggleTheme } = useContext(ThemeContext)
   return (

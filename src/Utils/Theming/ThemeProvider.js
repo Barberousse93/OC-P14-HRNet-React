@@ -1,17 +1,26 @@
+/* eslint-disable comma-dangle */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { ThemeProvider } from '@emotion/react'
 import ThemeContext from './ThemeContext'
 import { LOCAL_STORAGE_KEY, DARK_THEME, LIGHT_THEME } from './Theme'
 
+/**
+ *
+ * @param {string} props - Thème light ou dark
+ * @returns {component} - ThemeProvider
+ */
 function ThemeHandler(props) {
   const [isDark, setDark] = useState(
-    localStorage.getItem(LOCAL_STORAGE_KEY) === 'true'
+    localStorage.getItem(LOCAL_STORAGE_KEY) === 'true',
   )
 
+  /**
+   * Contexte
+   */
   const ctxValue = {
     isDark,
-    toggleTheme
+    toggleTheme,
   }
 
   function toggleTheme() {
