@@ -111,7 +111,11 @@ function CreateEmployee() {
   return (
     <>
       {isOpen && (
-        <Modal setIsOpen={setIsOpen} text="Employee successfully added." />
+        <Modal
+          setIsOpen={setIsOpen}
+          text="Employee successfully added."
+          buttonColor="gray"
+        />
       )}
       <Container>
         <Typography variant="h4" component="h1">
