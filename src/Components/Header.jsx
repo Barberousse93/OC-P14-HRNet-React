@@ -18,7 +18,7 @@ function Header() {
         <Link to="/">
           <img src={logo} alt="logo HRNet" width={'150px'} height={'138px'} />
         </Link>
-        <Typography variant="h3" component="h1">
+        <Typography variant="h3" component="h1" style={{ marginLeft: '15px' }}>
           HRNet
         </Typography>
       </div>
